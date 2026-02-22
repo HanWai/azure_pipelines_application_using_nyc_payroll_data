@@ -1,0 +1,9 @@
+{
+	"name": "adf-hanwai",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "65ecb47d-85a8-44fa-81c5-8995d425253e",
+		"tenantId": "96306bf1-4d0a-46b7-b8d3-8d197b5cff6e"
+	}
+}

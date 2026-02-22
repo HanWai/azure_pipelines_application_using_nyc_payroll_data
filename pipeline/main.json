@@ -1,0 +1,72 @@
+{
+	"name": "main",
+	"properties": {
+		"activities": [
+			{
+				"name": "agency_employee_title",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "agency_employee_title",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "payroll",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "agency_employee_title",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "nycpayroll",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "summary",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "payroll",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "summary",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-02-22T16:17:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
